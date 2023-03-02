@@ -1,0 +1,16 @@
+eureka-server:
+  image:  es
+  hostname: eureka-server
+  ports:
+    - "8761:8761"
+
+producer:
+  image:  producer
+  links:
+    - "eureka-server"
+
+
+consumer:
+  image:  consumer
+  links:
+    - "eureka-server"

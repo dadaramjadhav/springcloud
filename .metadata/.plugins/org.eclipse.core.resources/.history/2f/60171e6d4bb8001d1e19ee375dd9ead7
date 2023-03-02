@@ -1,0 +1,3 @@
+#server.port=7094
+spring.application.name=producer
+

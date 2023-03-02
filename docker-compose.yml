@@ -1,0 +1,25 @@
+services:
+  eureka-server:
+    image: es
+    ports:
+      - "7090:7090"
+    networks:
+      - backend
+  producer:
+    image: producer
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka-server:7090/eureka"
+    ports:
+      - "7091:7091"
+    networks:
+      - backend
+  consumer:
+    image: consumer
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka-server:7090/eureka"
+    ports:
+      - "7092:7092"
+    networks:
+      - backend
+networks:
+  backend:

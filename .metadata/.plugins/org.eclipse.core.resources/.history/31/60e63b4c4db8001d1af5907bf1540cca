@@ -1,0 +1,4 @@
+FROM java:8
+EXPOSE 7091
+ADD /target/*.jar consumer.jar
+ENTRYPOINT ["java","-jar","consumer.jar"]

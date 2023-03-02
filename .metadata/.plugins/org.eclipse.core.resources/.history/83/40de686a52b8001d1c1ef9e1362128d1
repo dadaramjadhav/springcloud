@@ -1,0 +1,21 @@
+eureka-server:
+  image:  es
+  hostname: eureka-server
+  ports:
+    - "8761:8761"
+
+service-b:
+  image:  spring-cloud-netflix-example/service-b
+  links:
+    - "eureka-server"
+
+
+service-a:
+  image:  spring-cloud-netflix-example/service-a
+  links:
+    - "eureka-server"
+    - "config-server"
+    - "service-b"
+    - "hystrix-dashboard"
+    - "rabbitmq"
+    - "zipkin"

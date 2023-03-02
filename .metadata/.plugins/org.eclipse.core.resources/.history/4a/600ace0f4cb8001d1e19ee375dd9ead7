@@ -1,0 +1,22 @@
+package com.example;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.cloud.context.restart.RestartEndpoint;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+@RestController
+public class ConsumerController {
+
+	@Autowired
+	LoadBalancerClient lb;
+
+	@GetMapping("/consumer")
+	public String print() {
+
+		return new RestTemplate().getForObject(lb.choose("producer").getUri().toString(), String.class);
+	}
+}
